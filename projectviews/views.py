@@ -73,3 +73,26 @@ def get_project(request, id):
 
 class ProjectsDetailView(DetailView):
     model = Projects
+
+class ProjectsCreateView(LoginRequiredMixin, CreateView):
+    model = Projects
+    fields =['author','image','description', 'title' ,'link']
+
+    def form_valid(self, form):
+        form.instance.profile = self.request.user.profile
+        return super ().form_valid(form)
+
+
+class ProjectsUpdateView(LoginRequiredMixin,UserPassesTestMixin,  UpdateView):
+    model = Projects
+    fields =['author','image','description', 'title' ,'link']
+
+    def form_valid(self, form):
+        form.instance.profile = self.request.user.profile
+        return super ().form_valid(form)
+
+    def test_func(self):
+        Projects = self.get_object()
+        if self.request.user.profile == Projects.profile:
+            return True
+        return False
