@@ -19,6 +19,25 @@ This is a project where users are able post their projects, view other projects,
 * Review different projects
 * See your profile with all your projects.  
 * See other projects posted  
+
+# Behaviour Driven Development
+
+| Input        | Output           | Behavior  |
+| ------------- |:-------------:| -----:|
+| Visit awwwards-clone site| Various projects are displayed  | User can review projects |
+| Click on image| Image details displayed | Image details displayed |
+| Search project | Images for project are displayed | App gets the projects for the searched project |
+| Visit profile | Projects posted by user are displayed | App gets projects for user |
+| Visit Admin | Prompts for admin credentials | Admin dashboard displayed |
+| API projects | api with a list of projects is displayed | api displayed |
+
+
+## Technologies used
+* Django-a python frame-work
+* Javascript
+* Html
+* Bootstrap
+* Postman for visual representaion while building the api
   
 
   
