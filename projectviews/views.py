@@ -22,3 +22,18 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.profile = self.request.user.profile
         return super ().form_valid(form)
+    
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,  UpdateView):
+    model = Projects
+    success_url = '/'
+    fields =['author','image','description', 'title' ,'link']
+
+    def form_valid(self, form):
+        form.instance.profile = self.request.user.profile
+        return super ().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user.profile == post.author_profile:
+            return True
+        return False
