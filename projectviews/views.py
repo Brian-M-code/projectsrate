@@ -37,3 +37,39 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,  UpdateView):
         if self.request.user.profile == post.author_profile:
             return True
         return False
+    
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+    model = Projects
+    success_url ='/'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user.profile == post.author_profile:
+            return True
+        return False
+   
+
+@login_required
+def Projectsproject(request):
+    current_user = request.user
+    if request.method == 'Projects':
+        form = ProjectForm(request.Projects, request.FILES)
+        if form.is_valid():
+            project = form.save(commit=False)
+            project.author = current_user
+            project.save()
+        return redirect('/')
+    else:
+        form = ProjectForm()
+    context = {
+        'form':form,
+    }
+    return render(request, 'create-project.html', context)
+
+def get_project(request, id):
+    project = Projects.objects.get(pk=id)
+
+    return render(request, 'project.html', {'project':project})
+
+class ProjectsDetailView(DetailView):
+    model = Projects
