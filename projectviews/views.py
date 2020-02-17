@@ -7,6 +7,13 @@ from django.views.generic import ListView,DetailView,CreateView,UpdateView,Delet
 from .models import  Projects,Profile
 from .serializer import ProjectsSerializer,ProfileSerializer
 
+
+
+from django.contrib.auth.decorators import login_required
+from user.forms import ProjectForm
+from .models import *
+
+
 class PostListView(ListView):
     model = Projects
     template_name = 'index.html'
@@ -15,7 +22,9 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Projects
-    
+
+
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Projects
     success_url = '/'
@@ -24,7 +33,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.profile = self.request.user.profile
         return super ().form_valid(form)
-    
+
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,  UpdateView):
     model = Projects
     success_url = '/'
@@ -39,7 +48,7 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,  UpdateView):
         if self.request.user.profile == post.author_profile:
             return True
         return False
-    
+
 class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model = Projects
     success_url ='/'
@@ -75,6 +84,7 @@ def get_project(request, id):
 
 class ProjectsDetailView(DetailView):
     model = Projects
+    
 
 class ProjectsCreateView(LoginRequiredMixin, CreateView):
     model = Projects
@@ -98,7 +108,9 @@ class ProjectsUpdateView(LoginRequiredMixin,UserPassesTestMixin,  UpdateView):
         if self.request.user.profile == Projects.profile:
             return True
         return False
-    
+
+
+
 class ReviewCreateView(LoginRequiredMixin,CreateView):
     model = Review
     fields = ['design', 'usability', 'creativity', 'content']
@@ -115,7 +127,11 @@ class ReviewCreateView(LoginRequiredMixin,CreateView):
         form.instance.user = self.request.user
         form.instance.project = self.project
         return super().form_valid(form)
-    
+
+
+
+
+
 class ProjectsList(APIView):
     def get(self, request, format=None):
         all_projects = Projects.objects.all()
