@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse
 from rest_framework.response import Response
-from .models import  Projects,Profile
+from rest_framework.views import APIView
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
-
+from .models import  Projects,Profile
+from .serializer import ProjectsSerializer,ProfileSerializer
 
 class PostListView(ListView):
     model = Projects
@@ -113,3 +115,27 @@ class ReviewCreateView(LoginRequiredMixin,CreateView):
         form.instance.user = self.request.user
         form.instance.project = self.project
         return super().form_valid(form)
+    
+class ProjectsList(APIView):
+    def get(self, request, format=None):
+        all_projects = Projects.objects.all()
+        serializers = ProjectsSerializer(all_projects, many=True)
+        return Response(serializers.data)
+
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profile = Profile.objects.all()
+        serializers = ProfileSerializer(all_profile, many=True)
+        return Response(serializers.data)
+
+def display_profile(request,username):
+    profile = Profile.objects.get(user__username= username)
+
+    user_projects = Projects.objects.filter(author_profile =profile).order_by('created_date')
+
+    context={
+        "profile":profile,
+        "user_projects":user_projects
+    }
+    return render(request,'profile_details.html',context)
