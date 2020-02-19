@@ -1,6 +1,6 @@
 from django.conf.urls.static import static
 from django.conf.urls import url,include
-from .views import PostListView,PostDetailView, PostCreateView,PostUpdateView,PostDeleteView,ReviewCreateView
+from .views import PostListView,PostDetailView, PostCreateView,PostUpdateView,PostDeleteView, ReviewCreateView
 from . import views
 
 
@@ -14,6 +14,4 @@ urlpatterns = [
     url(r'^post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     url(r'^post/new/$', PostCreateView.as_view(), name='post-create'),
     url(r'^review/new/<int:pk>/', ReviewCreateView.as_view(), name='review-create'),
-    url(r'^api/profile/$', views.ProfileList.as_view()),
-    url(r'^api/projects/$', views.ProjectsList.as_view()),
 ]

@@ -6,12 +6,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from .models import  Projects,Profile
 from .serializer import ProjectsSerializer,ProfileSerializer
-
-
-
 from django.contrib.auth.decorators import login_required
 from user.forms import ProjectForm
 from .models import *
+from django.core.urlresolvers import reverse, NoReverseMatch
 
 
 class PostListView(ListView):
@@ -108,8 +106,7 @@ class ProjectsUpdateView(LoginRequiredMixin,UserPassesTestMixin,  UpdateView):
         if self.request.user.profile == Projects.profile:
             return True
         return False
-
-
+    
 
 class ReviewCreateView(LoginRequiredMixin,CreateView):
     model = Review
@@ -126,9 +123,8 @@ class ReviewCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.instance.project = self.project
-        return super().form_valid(form)
-
-
+        return super().form_valid(form)    
+    
 
 
 

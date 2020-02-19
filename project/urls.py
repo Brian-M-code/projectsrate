@@ -21,12 +21,13 @@ from django.conf import settings
 from django.conf.urls import url,include
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url('admin/', admin.site.urls),
+    url('', include('projectviews.urls')),
     url(r'^register/', user_views.register, name='register'),
     url(r'^login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^profile/', user_views.profile, name='profile'),
     url(r'^logout/', auth_views.LogoutView.as_view( template_name='logout.html' ), name='logout'),
-    url('', include('projectviews.urls')),
+    
 ]
 
 if settings.DEBUG:
