@@ -21,7 +21,7 @@ This is a project where users are able post their projects, view other projects,
 * See other projects posted 
 
 #### App screenshot
-<img src="projectviews/static/images/projectawwards.png">
+<img src="projectviews/static/images/project.png">
 
 # Behaviour Driven Development
 
