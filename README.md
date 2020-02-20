@@ -18,7 +18,10 @@ This is a project where users are able post their projects, view other projects,
 * Upload a pictures to the application. 
 * Review different projects
 * See your profile with all your projects.  
-* See other projects posted  
+* See other projects posted 
+
+#### App screenshot
+<img src="projectviews/static/images/awwards.png">
 
 # Behaviour Driven Development
 
