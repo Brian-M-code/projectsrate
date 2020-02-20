@@ -1,0 +1,50 @@
+<div class="container mt-10 mt-lg-10">
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/" style="color: white; font-weight: bold;">AWwards</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/" style="color: white; font-weight: bold;">Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' username=user %}" style="color: white; font-weight: bold;">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/" style="color: white; font-weight: bold;">Sign Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/accounts/login" style="color: white; font-weight: bold;">Sign In</a>
+                    </li>
+                {% endif %}
+                
+                {% if user.is_authenticated %}
+                <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">APIs</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="{% url 'profile_list' %}">Profile</a>
+                            <a class="dropdown-item" href="{% url 'projects_list' %}">Projects</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'post_site' %}" id="projects" class="btn btn-dark">SUBMIT PROJECT</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <!-- Links -->
+            <form class="form-inline" action="{% url 'search_results' %}">
+                <div class="md-form my-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="titles">
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>

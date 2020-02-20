@@ -1,4 +1,4 @@
-#!/home/mutumas/Documents/python/Django/Django-IPs/reveiwer/virtual/bin/python3.6
+#!/home/mutumas/Documents/python/Django/awwards-redo/virtual/bin/python3.6
 from django.core import management
 
 if __name__ == "__main__":

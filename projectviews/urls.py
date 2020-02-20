@@ -1,17 +1,27 @@
-from django.conf.urls.static import static
-from django.conf.urls import url,include
-from .views import PostListView,PostDetailView,PostUpdateView,PostDeleteView, ReviewCreateView, Postcreate
-from . import views
+"""projectviews URL Configuration
 
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.11/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.conf.urls import url, include
+    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.conf.urls import url, include
+from django.contrib.auth import views
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-    url('',  PostListView.as_view(), name='projects-index'),
+    url('admin/', admin.site.urls),
+    url(r'', include('project.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^api/projects/$', views.ProjectsList.as_view()),
-    url(r'^post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
-    url(r'^profile/details/<str:username>/',views.display_profile, name = 'profile-detail'),
-    url(r'^post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
-    url(r'^post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    url(r'^post/', views.Postcreate, name='post-create'),
-    url(r'^review/new/<int:pk>/', ReviewCreateView.as_view(), name='review-create'),
+    url(r'^logout/$', views.logout, {"next_page": '/'}),
+    url(r'^api-token-auth/', obtain_auth_token)
 ]

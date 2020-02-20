@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/mutumas/Documents/python/Django/Django-IPs/reveiwer/virtual"
+set -gx VIRTUAL_ENV "/home/mutumas/Documents/python/Django/awwards-redo/virtual"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
