@@ -149,14 +149,13 @@
                         <div class="grid js-grid" id="items-row">
                             <ul class="list-items list-flex list-one-row js-elements-container">
 
-                                {% for project_item in projects %}
-                                <!-- {% if project in projects %} -->
+                                {% for project in projects %}
                                     <li class="col-3 js-collectable">
                                         <div class="box-item">
                                             <figure class="rollover ">
                                                 <a href="">
                                                     <div class="box-photo">
-                                                        <img src="{{project_item.image.url}}" alt="More info" width="417"
+                                                        <img src="{{project.image.url}}" alt="More info" width="417"
                                                             height="298" class="lazy" />
                                                     </div>
                                                 </a>
@@ -178,7 +177,7 @@
                                                             
                                                             <div class="by">
                                                                 by <strong><a
-                                                                        class="text-black">{{project_item.author.username|upper}}</a></strong>
+                                                                        class="text-black">{{project.author.username|upper}}</a></strong>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -190,7 +189,6 @@
                                             </div>
                                         </div>
                                     </li>
-                                <!-- {% endif %} -->
                                 {% endfor %}
                             </ul>
                         </div>

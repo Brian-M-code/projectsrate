@@ -23,14 +23,21 @@ class PostDetailView(DetailView):
 
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
+class Postcreate(LoginRequiredMixin, CreateView):
     model = Projects
     success_url = '/'
     fields =['author','image','description', 'title' ,'link']
 
     def form_valid(self, form):
+        form = ProjectUploadForm(request.POST, request.FILES)
         form.instance.profile = self.request.user.profile
-        return super ().form_valid(form)
+        return render(request, 'projects_form.html', context)
+
+def Postcreate(request):    
+    current_user = request.user
+    form = ProjectUploadForm()
+    return render(request, 'projects_form.html', {"form":form,})
+    
 
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,  UpdateView):
     model = Projects
@@ -61,24 +68,22 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 @login_required
 def Projectsproject(request):
     current_user = request.user
-    if request.method == 'Projects':
+    if request.method == 'POST':
         form = ProjectForm(request.Projects, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
             project.author = current_user
             project.save()
-        return redirect('/')
+        return redirect('projects-index')
     else:
-        form = ProjectForm()
-    context = {
-        'form':form,
-    }
-    return render(request, 'create-project.html', context)
+        form = ProjectUploadForm()
+    # context = {'form':form,}
+    return render(request, 'projects_form.html', context)
 
 def get_project(request, id):
     project = Projects.objects.get(pk=id)
 
-    return render(request, 'project.html', {'project':project})
+    return render(request, 'project_detail.html', {'project':project})
 
 class ProjectsDetailView(DetailView):
     model = Projects
@@ -150,4 +155,4 @@ def display_profile(request,username):
         "profile":profile,
         "user_projects":user_projects
     }
-    return render(request,'profile_details.html',context)
+    return render(request,'profile_detail.html',context)
