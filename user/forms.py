@@ -3,11 +3,6 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from projectviews.models import Projects,Profile
 from django.contrib.auth.forms import UserCreationForm
-
-
-
-
-
 class UserRegisterForm(UserCreationForm):
 
     email = forms.EmailField(label=" ",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))

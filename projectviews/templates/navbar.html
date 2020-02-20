@@ -3,28 +3,27 @@
         <div class="box-left">
             <div class="item bt-menu">
                 <div class="ico-menu">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                {% if user.is_authenticated %}    
+                    <div class="bar">l</div>
+                    <div class="bar">m</div>
+                    <div class="bar">l</div>
+                </div>  
+                    <span class="has-tablet">MENU</span>
                 </div>
-                <span class="has-tablet">MENU</span>
             </div>
-        </div>
-        <div class="box-right">
-            <div class="item bt-search " id="js-search-container">
-                <svg class="ico-svg" viewbox="0 0 14 14">
-                    <use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#search"></use>
-                </svg>
-            </div>
-            <div>
+            {% if user.is_authenticated %}  
+                <div class="box-right">
+                    <div class="item bt-search " id="js-search-container">
+                        <svg class="ico-svg" viewbox="0 0 14 14">
+                            <use xlink:href="https://www.awwwards.com/assets/images/sprite-icons.svg#search"></use>
+                        </svg>
+                    </div>
+                <div>
                     <strong><a class="text-black" href="{% url 'logout' %}">Logout</a></strong>
-
-            </div>
+                </div>
             {% else%}
-            <div> <strong><a class="text-black" href="{% url 'register' %}">Register</a></strong> |
-                <strong><a class="text-black" href="{% url 'login' %}"> log in</a></strong>
-            </div>
+                <div> <strong><a class="text-black" href="{% url 'register' %}">Register</a></strong> |
+                    <strong><a class="text-black" href="{% url 'login' %}"> log in</a></strong>
+                </div>
             {% endif %}
             <div class="item has-tablet" id="bt-submit">
                 <a href="{% url 'post-create' %}" >
