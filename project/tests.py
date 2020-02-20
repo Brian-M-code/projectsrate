@@ -13,4 +13,8 @@ class ProfileTestClass(TestCase):
         self.brian.save_profile()
         profiles = Profile.objects.all()
         self.assertTrue(len(profiles)>0)
- 
+
+
+class RateTestClass(TestCase):
+    def setUp(self):
+        

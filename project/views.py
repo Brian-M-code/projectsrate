@@ -68,7 +68,7 @@ def edit_profile(request):
     else:
         form = ProfileEditForm()
 
-    return render(request, 'profile/edit_profile.html', {"form":form, "profile_details":profile_details})
+    return render(request, 'profile/editp.html', {"form":form, "profile_details":profile_details})
 
 @login_required(login_url='/accounts/login/')
 def post_site(request):
