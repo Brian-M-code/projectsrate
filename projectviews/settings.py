@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authentication',
     'url_or_relative_url_field',
-    
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +133,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_FACEBOOK_KEY = '204209377620862'        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'fbf2fc3f3e1828f9e90c19e0ea5ce8c6'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

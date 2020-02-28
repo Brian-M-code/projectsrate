@@ -20,7 +20,7 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/accounts/login" style="color: white; font-weight: bold;">Log In</a>
+                        <a class="nav-link" href="{% url 'social:begin' 'facebook' %}" style="color: white; font-weight: bold;">Log In</a>
                     </li>
                 {% endif %}
                 

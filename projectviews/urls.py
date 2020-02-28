@@ -17,11 +17,16 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from django.contrib.auth import views
 from rest_framework.authtoken.views import obtain_auth_token
+from django.contrib.auth import views as auth_views
+from project import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'', include('project.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^logout/$', views.logout, {"next_page": '/'}),
-    url(r'^api-token-auth/', obtain_auth_token)
+    url("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    url(r'^api-token-auth/', obtain_auth_token),
+    url('social-auth/', include('social_django.urls', namespace="social")),
+    url("", views.index, name="index"),
+    
 ]

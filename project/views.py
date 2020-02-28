@@ -12,6 +12,9 @@ from rest_framework import status
 from .permissions import IsAdminOrReadOnly
 
 # Create your views here.
+def login(request):
+      return render(request, 'login.html')
+  
 def index(request):
     projects = Projects.objects.all()
     context = {
